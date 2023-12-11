@@ -15,7 +15,6 @@ namespace Inventory.Entities
         public Category? Category { get; set; }
         public int SupplierId { get; set; }
         public Supplier? Supplier { get; set; }
-        public IEnumerable<InventoryMovement>? InventoryMovements { get; set; }
         public IEnumerable<InventoryStock>? InventoryStocks { get; set; }
     }
 }
