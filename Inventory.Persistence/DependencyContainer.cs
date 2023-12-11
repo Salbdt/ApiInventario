@@ -1,5 +1,6 @@
 using Inventory.Persistence.Interfaces;
 using Inventory.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
