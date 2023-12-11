@@ -1,3 +1,4 @@
+using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,13 @@ namespace Inventory.WebAPI.Controllers
         {
             var categories = await _categoryRepository.GetAllAsync();
             return Ok(categories);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Category category)
+        {
+            var categoryCreated = await _categoryRepository.AddAsync(category);
+            return Ok(categoryCreated);
         }
     }
 }
