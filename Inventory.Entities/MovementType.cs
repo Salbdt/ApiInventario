@@ -9,6 +9,9 @@ namespace Inventory.Entities
         public bool IsOutGoing { get; set; }
         public bool IsInternalTransfer { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }        
+        public DateTime UpdatedAt { get; set; }  
+
+        // Relations
+        public IEnumerable<InventoryMovement>? InventoryMovements { get; set; }
     }
 }
