@@ -54,5 +54,30 @@ namespace Inventory.WebAPI.Controllers
 
             return Ok(categoryCreatedDTO);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, CategoryToEditDTO categoryToEditDTO)
+        {
+            if (id != categoryToEditDTO.Id)
+                return BadRequest("ERROR: Los datos ingresados son incorrectos.");
+
+            var categoryToEdit = await _categoryRepository.GetByIdAsync(id);
+
+            if (categoryToEdit is null)
+                return BadRequest("ERROR: ID no encontrado.");
+
+            _mapper.Map(categoryToEditDTO, categoryToEdit);
+            categoryToEdit.UpdatedAt = DateTime.Now;
+
+            var updated = await _categoryRepository.UpdateAsync(id, categoryToEdit);
+
+            if (!updated)
+                return NoContent();
+
+            var category = await _categoryRepository.GetByIdAsync(id);
+            var categoryDTO = _mapper.Map<CategoryToListDTO>(category);
+
+            return Ok(categoryDTO);
+        }
     }
 }
