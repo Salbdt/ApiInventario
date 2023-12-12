@@ -3,6 +3,7 @@ using Inventory.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddContextSQLServer(builder.Configuration, "DefaultConnection");
 builder.Services.AddRepositories();
 
