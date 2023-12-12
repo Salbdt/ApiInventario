@@ -28,6 +28,15 @@ namespace Inventory.WebAPI.Controllers
             return Ok(categoriesDTO);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var category = await _categoryRepository.GetByIdAsync(id);
+            var categoryDTO = _mapper.Map<CategoryToListDTO>(category);
+
+            return Ok(categoryDTO);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(CategoryToCreateDTO categoryToCreateDTO)
         {
