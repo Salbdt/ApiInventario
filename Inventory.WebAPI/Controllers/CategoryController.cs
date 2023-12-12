@@ -1,3 +1,4 @@
+using Inventory.DTOs.Category;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,15 +20,32 @@ namespace Inventory.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var categories = await _categoryRepository.GetAllAsync();
+
             return Ok(categories);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Category category)
+        public async Task<IActionResult> Post(CategoryToCreateDTO categoryToCreateDTO)
         {
-            category.CreatedAt = DateTime.Now;
-            var categoryCreated = await _categoryRepository.AddAsync(category);
-            return Ok(categoryCreated);
+            var categoryToCreate = new Category
+            {
+                Name = categoryToCreateDTO.Name,
+                Description = categoryToCreateDTO.Description,
+                CreatedAt = DateTime.Now
+            };
+
+            var categoryCreated = await _categoryRepository.AddAsync(categoryToCreate);
+
+            var categoryCreatedDTO = new CategoryToListDTO
+            {
+                Id = categoryCreated.Id,
+                Name = categoryCreated.Name,
+                Description = categoryCreated.Description,
+                CreatedAt = categoryCreated.CreatedAt,
+                UpdatedAt = categoryCreated.UpdatedAt
+            };
+
+            return Ok(categoryCreatedDTO);
         }
     }
 }
