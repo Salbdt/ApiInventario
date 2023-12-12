@@ -64,7 +64,7 @@ namespace Inventory.WebAPI.Controllers
             var categoryToEdit = await _categoryRepository.GetByIdAsync(id);
 
             if (categoryToEdit is null)
-                return BadRequest("ERROR: ID no encontrado.");
+                return BadRequest("ERROR: Elemento no encontrado.");
 
             _mapper.Map(categoryToEditDTO, categoryToEdit);
             categoryToEdit.UpdatedAt = DateTime.Now;
@@ -78,6 +78,22 @@ namespace Inventory.WebAPI.Controllers
             var categoryDTO = _mapper.Map<CategoryToListDTO>(category);
 
             return Ok(categoryDTO);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var categoryToDelete = await _categoryRepository.GetByIdAsync(id);
+
+            if (categoryToDelete is null)
+                return NotFound("ERROR: Elemento no encontrado.");
+
+            var deleted = await _categoryRepository.DeleteAsync(id);
+
+            if (!deleted)
+                return Ok("El elemento no se pudo eliminar.");
+
+            return Ok("Elemento eliminado.");
         }
     }
 }
