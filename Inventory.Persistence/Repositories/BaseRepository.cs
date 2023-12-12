@@ -1,4 +1,3 @@
-using System.Data.Common;
 using Inventory.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

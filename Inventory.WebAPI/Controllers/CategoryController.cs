@@ -25,6 +25,7 @@ namespace Inventory.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Category category)
         {
+            category.CreatedAt = DateTime.Now;
             var categoryCreated = await _categoryRepository.AddAsync(category);
             return Ok(categoryCreated);
         }

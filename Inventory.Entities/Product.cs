@@ -8,7 +8,7 @@ namespace Inventory.Entities
         public string BarCode { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         // Relations
         public int CategoryId { get; set; }
