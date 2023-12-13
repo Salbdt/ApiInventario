@@ -1,5 +1,6 @@
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Persistence.Repositories
 {
@@ -28,14 +29,28 @@ namespace Inventory.Persistence.Repositories
             return user;
         }
 
-        public Task<User> Login(string email, string password)
+        public async Task<User> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+
+            if (user is null)
+                return null;
+
+            // Si el password no coincide
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            return user;
         }
 
-        public Task<bool> UserExists(string email)
+        public async Task<bool> UserExists(string email)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+
+            if (user is not null)
+                return true;
+
+            return false;
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -45,6 +60,22 @@ namespace Inventory.Persistence.Repositories
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computeHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                for(int i = 0; i < computeHash.Length; i++)
+                {
+                    if(computeHash[i] != passwordHash[i])
+                        return false;
+                }
+            }
+
+            return true;
         }
     }
 }
