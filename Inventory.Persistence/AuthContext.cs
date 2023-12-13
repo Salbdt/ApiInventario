@@ -5,7 +5,7 @@ namespace Inventory.Persistence
 {
     public class AuthContext : DbContext
     {
-        public AuthContext(DbContextOptions<DataContext> options) : base(options)
+        public AuthContext(DbContextOptions<AuthContext> options) : base(options)
         {
             
         }
