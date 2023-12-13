@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.MovementType
 {
-    public class MovementTypeToCreateDto
+    public class MovementTypeToCreateDTO
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

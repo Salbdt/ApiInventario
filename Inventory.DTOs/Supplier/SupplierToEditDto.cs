@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.Supplier
 {
-    public class SupplierToEditDto
+    public class SupplierToEditDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

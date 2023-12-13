@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.MovementType
 {
-    public class MovementTypeToListDto
+    public class MovementTypeToListDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

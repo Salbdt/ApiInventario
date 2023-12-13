@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.InventoryStock
 {
-    public class InventoryStockToCreateDto
+    public class InventoryStockToCreateDTO
     {
         public int ProductId { get; set; }
         public int Quantity { get; set; }

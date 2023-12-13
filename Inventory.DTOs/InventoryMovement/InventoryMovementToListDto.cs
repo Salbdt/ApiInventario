@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.InventoryMovement
 {
-    public class InventoryMovementToListDto
+    public class InventoryMovementToListDTO
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

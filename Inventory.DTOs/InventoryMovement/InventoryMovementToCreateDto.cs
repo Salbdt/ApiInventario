@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.InventoryMovement
 {
-    public class InventoryMovementToCreateDto
+    public class InventoryMovementToCreateDTO
     {
         public int ProductId { get; set; }
         public DateTime Date { get; set; }

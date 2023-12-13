@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.Product
 {
-    public class ProductToEditDto
+    public class ProductToEditDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

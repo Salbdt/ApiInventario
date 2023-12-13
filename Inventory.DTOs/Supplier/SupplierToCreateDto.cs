@@ -1,6 +1,6 @@
 namespace Inventory.DTOs.Supplier
 {
-    public class SupplierToCreateDto
+    public class SupplierToCreateDTO
     {
         public string Name { get; set; } = string.Empty;
         public string ContactPerson { get; set; } = string.Empty;
