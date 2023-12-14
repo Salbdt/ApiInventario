@@ -1,3 +1,4 @@
+using Inventory.APIAuthorization.Services.Interfaces;
 using Inventory.DTOs.Auth;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
@@ -10,10 +11,12 @@ namespace Inventory.APIAuthorization.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepository;
+        private readonly ITokenService _tokenService;
 
-        public AuthController(IAuthRepository authRepository)
+        public AuthController(IAuthRepository authRepository, ITokenService tokenService)
         {
             _authRepository = authRepository;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
@@ -46,7 +49,9 @@ namespace Inventory.APIAuthorization.Controllers
             if (userFromRepo is null)
                 return Unauthorized();
 
-            UserToListDTO userToReturn = new (userFromRepo.Id, userFromRepo.Email, userFromRepo.Name, userFromRepo.Phone, "");
+            var token = _tokenService.CreateToken(userFromRepo);
+
+            UserToListDTO userToReturn = new (userFromRepo.Id, userFromRepo.Email, userFromRepo.Name, userFromRepo.Phone, token);
 
             return Ok(userToReturn);
         }
