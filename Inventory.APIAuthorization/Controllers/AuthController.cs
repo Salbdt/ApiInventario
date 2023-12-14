@@ -19,21 +19,34 @@ namespace Inventory.APIAuthorization.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserToRegisterDTO userToRegisterDTO)
         {
-            if (await _authRepository.UserExists(userToRegisterDTO.Email))
+            if (await _authRepository.UserExists(userToRegisterDTO.Email.ToLower()))
                 return BadRequest($"El email {userToRegisterDTO.Email} ya se encuentra registrado.");
 
             var userToCreate = new User
             {
                 Name = userToRegisterDTO.Name,
-                Email = userToRegisterDTO.Email,
+                Email = userToRegisterDTO.Email.ToLower(),
                 Phone = userToRegisterDTO.Phone,
                 DateCreated = DateTime.Now,
                 Active = true
-            }
+            };
 
             var userCreated = await _authRepository.Register(userToCreate, userToRegisterDTO.Password);
 
-            var userToReturn = new UserToListDTO(userCreated.Id, userCreated.Email, userCreated.Name, userCreated.Phone, "");
+            UserToListDTO userToReturn = new (userCreated.Id, userCreated.Email, userCreated.Name, userCreated.Phone, "");
+
+            return Ok(userToReturn);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserToLoginDTO userToLoginDTO)
+        {
+            var userFromRepo = await _authRepository.Login(userToLoginDTO.Email.ToLower(), userToLoginDTO.Password);
+
+            if (userFromRepo is null)
+                return Unauthorized();
+
+            UserToListDTO userToReturn = new (userFromRepo.Id, userFromRepo.Email, userFromRepo.Name, userFromRepo.Phone, "");
 
             return Ok(userToReturn);
         }
