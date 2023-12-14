@@ -2,10 +2,12 @@ using AutoMapper;
 using Inventory.DTOs.Category;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase
