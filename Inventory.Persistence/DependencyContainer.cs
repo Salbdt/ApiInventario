@@ -18,6 +18,16 @@ namespace Inventory.Persistence
             return services;
         }
 
+        public static IServiceCollection AddAuthContextSQLServer(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            string connectionStringName
+        )
+        {
+            services.AddSqlServer<AuthContext>(configuration.GetConnectionString(connectionStringName));
+            return services;
+        }
+
         public static IServiceCollection AddContextSQLite(
             this IServiceCollection services,
             IConfiguration configuration,
@@ -25,6 +35,16 @@ namespace Inventory.Persistence
         )
         {
             services.AddSqlite<DataContext>(configuration.GetConnectionString(connectionString));
+            return services;
+        }
+
+        public static IServiceCollection AddAuthContextSQLite(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            string connectionStringName
+        )
+        {
+            services.AddSqlite<AuthContext>(configuration.GetConnectionString(connectionStringName));
             return services;
         }
 
