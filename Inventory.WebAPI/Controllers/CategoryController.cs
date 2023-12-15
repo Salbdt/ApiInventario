@@ -2,23 +2,18 @@ using AutoMapper;
 using Inventory.DTOs.Category;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CategoryController : ControllerBase
+    public class CategoryController : BaseApiController
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IMapper _mapper;
 
         public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
+        : base(mapper)
         {
             _categoryRepository = categoryRepository;
-            _mapper = mapper;
         }
 
         [HttpGet]

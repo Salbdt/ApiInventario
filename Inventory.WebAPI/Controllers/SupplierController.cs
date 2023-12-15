@@ -1,21 +1,21 @@
 using AutoMapper;
+using Inventory.DTOs.Supplier;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Inventory.DTOs.Supplier;
 
 namespace Inventory.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SupplierController : ControllerBase
+    public class SupplierController : BaseApiController
     {
         private readonly ISupplierRepository _supplierRepository;
-        private readonly IMapper _mapper;
+        
         public SupplierController(ISupplierRepository supplierRepository,IMapper mapper)
+        : base(mapper)
         {
-          _supplierRepository = supplierRepository;   
-          _mapper= mapper;
+          _supplierRepository = supplierRepository;
         }
 
         [HttpGet]
