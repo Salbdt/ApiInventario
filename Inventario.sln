@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.WebAPI", "Invento
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.DTOs", "Inventory.DTOs\Inventory.DTOs.csproj", "{F2627962-44C3-40E2-B8A0-99CA980AEE9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.APIAuthorization", "Inventory.APIAuthorization\Inventory.APIAuthorization.csproj", "{F764BF6C-E67E-4424-BAC4-F79A7E4F73F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{F2627962-44C3-40E2-B8A0-99CA980AEE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2627962-44C3-40E2-B8A0-99CA980AEE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2627962-44C3-40E2-B8A0-99CA980AEE9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F764BF6C-E67E-4424-BAC4-F79A7E4F73F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F764BF6C-E67E-4424-BAC4-F79A7E4F73F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F764BF6C-E67E-4424-BAC4-F79A7E4F73F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F764BF6C-E67E-4424-BAC4-F79A7E4F73F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

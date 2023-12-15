@@ -1,20 +1,19 @@
 using AutoMapper;
+using Inventory.DTOs.Product;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Inventory.DTOs.Product;
+
 namespace Inventory.WebAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseApiController
     {
         private readonly IProductRepository _productRepository;
-        private readonly IMapper _mapper;
+        
         public ProductController(IProductRepository productRepository,IMapper mapper)
+        : base(mapper)
         {
           _productRepository = productRepository;   
-          _mapper= mapper;
         }
 
         [HttpGet]
